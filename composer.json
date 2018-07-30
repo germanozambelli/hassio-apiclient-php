@@ -1,6 +1,6 @@
 {
   "name": "GermanoZambelli/hassio-apiclient-php",
-  "description": "PHP Client for Hassio API",
+  "description": "A simple client for hass.io API",
   "license": "MIT",
   "authors": [
       {
