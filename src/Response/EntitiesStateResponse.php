@@ -1,6 +1,6 @@
 <?php
 
-namespace GermanoZambelli\Hassio\Model;
+namespace GermanoZambelli\Hassio\Response;
 
 class SimpleResponse implements ResponseInterface
 {
@@ -19,7 +19,7 @@ class SimpleResponse implements ResponseInterface
      * @param null|string $message
      * @param int $statusCode
      */
-    public function __construct(?string $message, int $statusCode)
+    public function __construct(int $statusCode, ?string $message)
     {
         $this->message = $message;
         $this->statusCode = $statusCode;

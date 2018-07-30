@@ -5,7 +5,7 @@ use GermanoZambelli\Hassio\Hassio;
 
 include __DIR__ . '/../vendor/autoload.php';
 
-$apiCredentials = new ApiCredentials('http://ipaddress:port', 'username');
+$apiCredentials = new ApiCredentials('http://ipaddress:port', 'password');
 
 $hassio = new Hassio($apiCredentials);
 

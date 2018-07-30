@@ -1,6 +1,5 @@
 <?php
 
-
 use GermanoZambelli\Hassio\Credentials\ApiCredentials;
 use GermanoZambelli\Hassio\Hassio;
 
@@ -10,4 +9,4 @@ $apiCredentials = new ApiCredentials('http://ipaddress:port', 'password');
 
 $hassio = new Hassio($apiCredentials);
 
-var_dump($hassio->validationConfigFiles());
+var_dump($hassio->callService('domain','service',['']));

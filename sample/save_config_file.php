@@ -5,7 +5,7 @@ use GermanoZambelli\Hassio\Hassio;
 
 include __DIR__ . '/../vendor/autoload.php';
 
-$configuratorCredentials = new ConfiguratorCredentials('http://192.168.1.60:3218', 'admin', 'gege22');
+$configuratorCredentials = new ConfiguratorCredentials('http://ipaddress:port', 'username', 'password');
 
 $hassio = new Hassio(null, $configuratorCredentials);
 
