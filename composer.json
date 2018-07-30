@@ -1,0 +1,22 @@
+{
+  "name": "GermanoZambelli/hassio-apiclient-php",
+  "description": "PHP Client for Hassio API",
+  "license": "MIT",
+  "authors": [
+      {
+        "name": "Germano Zambelli",
+        "email": "info@germano.codes",
+        "homepage": "https://zambelli.germano.codes",
+        "role": "Developer"
+      }
+  ],
+  "autoload" : {
+      "psr-4" : {
+        "GermanoZambelli\\Hassio\\" : "src"
+      }
+  },
+  "require": {
+      "php": ">=7.1",
+      "guzzlehttp/guzzle": "^6.3"
+  }
+}
