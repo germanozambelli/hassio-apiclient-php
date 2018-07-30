@@ -10,7 +10,7 @@ $ composer require germanozambelli/hassio-apiclient-php
 
 # Api Client Configuration
 
-```
+```php
 use GermanoZambelli\Hassio\Credentials\ApiCredentials;
 use GermanoZambelli\Hassio\Hassio;
 
@@ -20,29 +20,29 @@ $hassio = new Hassio($apiCredentials);
 
 # Methods available for ApiCredentials
 
-## getConfig(): SimpleResponse
+### getConfig(): SimpleResponse
 return the current hassio configuration
 
-## validationConfigFiles(): ValidationConfigResponse
+### validationConfigFiles(): ValidationConfigResponse
 return the validity of the hassio configuration files
 
-## callService(string $domain, string $service, array $data): SimpleResponse
+### callService(string $domain, string $service, array $data): SimpleResponse
 call an hassio service
 
-## turnOnEntity(Entity $entity): SimpleResponse
+### turnOnEntity(Entity $entity): SimpleResponse
 turn on an entity
 
-## turnOffEntity(Entity $entity): SimpleResponse
+### turnOffEntity(Entity $entity): SimpleResponse
 turn off an entity
 
-## getEntitiesState(): EntitiesStateResponse
+### getEntitiesState(): EntitiesStateResponse
 return list of all entities
 
 
 # Configurator Client Configuration
 
 to use it you need to install <a href="https://www.home-assistant.io/addons/configurator"/>HASS CONFIGURATOR</a> on hassio
-```
+```php
 use GermanoZambelli\Hassio\Credentials\ConfiguratorCredentials;
 use GermanoZambelli\Hassio\Hassio;
 
@@ -52,8 +52,8 @@ $hassio = new Hassio(null, $configuratorCredentials);
 
 # Methods available for ConfiguratorCredentials
 
-## getConfigFile(string $fileName): SimpleResponse
+### getConfigFile(string $fileName): SimpleResponse
 return a configuration file
 
-## saveConfigFile(string $fileName, string $content): SaveConfigFileResponse
+### saveConfigFile(string $fileName, string $content): SaveConfigFileResponse
 overwrite a configuration file
