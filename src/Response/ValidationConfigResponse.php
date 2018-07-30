@@ -1,6 +1,6 @@
 <?php
 
-namespace GermanoZambelli\Hassio\Model;
+namespace GermanoZambelli\Hassio\Response;
 
 class ValidationConfigResponse extends SimpleResponse
 {
@@ -8,7 +8,6 @@ class ValidationConfigResponse extends SimpleResponse
      * @var bool
      */
     private $valid;
-
 
     /**
      * ValidationConfigResponse constructor.
@@ -19,7 +18,7 @@ class ValidationConfigResponse extends SimpleResponse
     public function __construct(string $result, ?string $message, int $statusCode)
     {
         $this->valid = ($result != 'invalid');
-        parent::__construct($message, $statusCode);
+        parent::__construct($statusCode, $message);
     }
 
     /**

@@ -2,4 +2,4 @@
 
 namespace GermanoZambelli\Hassio\Exception;
 
-class NotFoundException extends \Exception{};
+class MethodNotAllowedException extends \Exception{};

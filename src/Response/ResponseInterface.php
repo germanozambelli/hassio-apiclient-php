@@ -1,6 +1,6 @@
 <?php
 
-namespace GermanoZambelli\Hassio\Model;
+namespace GermanoZambelli\Hassio\Response;
 
 interface ResponseInterface
 {
@@ -18,5 +18,4 @@ interface ResponseInterface
      * @return int
      */
     public function getStatusCode(): int;
-
 }

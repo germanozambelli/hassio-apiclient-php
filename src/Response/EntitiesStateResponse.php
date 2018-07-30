@@ -2,50 +2,41 @@
 
 namespace GermanoZambelli\Hassio\Response;
 
-class SimpleResponse implements ResponseInterface
+use GermanoZambelli\Hassio\Model\Entity;
+
+class EntitiesStateResponse extends SimpleResponse
 {
     /**
-     * @var string
-     */
-    private $message;
-
-    /**
-     * @var int
-     */
-    private $statusCode;
-
-    /**
-     * SimpleResponse constructor.
-     * @param null|string $message
+     * EntitiesStateResponse constructor.
      * @param int $statusCode
+     * @param string $message
      */
-    public function __construct(int $statusCode, ?string $message)
+    public function __construct(int $statusCode, string $message)
     {
-        $this->message = $message;
-        $this->statusCode = $statusCode;
+        parent::__construct($statusCode, $message);
     }
 
     /**
-     * @return bool
+     * @param array|null $domains
+     * @return array
      */
-    public function isError(): bool
+    public function getEntitiesByDomains(?array $domains): array
     {
-        return ($this->statusCode == 401);
+        $decodedMessage = json_decode(parent::getMessage());
+        $entities = [];
+        foreach ($decodedMessage as $entity) {
+            $domain = explode(".", $entity->entity_id)[0];
+            if(in_array($domain, $domains) || !$domains)
+                $entities[] = new Entity($domain, $entity->entity_id, (($entity->attributes->friendly_name) ?? null), $entity->attributes);
+        }
+        return $entities;
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getMessage(): string
+    public function getEntities(): array
     {
-        return $this->message;
-    }
-
-    /**
-     * @return int
-     */
-    public function getStatusCode(): int
-    {
-        return $this->statusCode;
+        return $this->getEntitiesByDomains([]);
     }
 }

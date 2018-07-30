@@ -60,5 +60,4 @@ class ConfiguratorCredentials extends AbstractCredentials
     {
         return $this->password;
     }
-
 }

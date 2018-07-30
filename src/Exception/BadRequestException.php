@@ -2,4 +2,4 @@
 
 namespace GermanoZambelli\Hassio\Exception;
 
-class WrongConfiguratorCredentialsException extends \Exception{};
+class BadRequestException extends \Exception{};

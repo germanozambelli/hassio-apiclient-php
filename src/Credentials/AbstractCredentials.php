@@ -8,7 +8,6 @@
 
 namespace GermanoZambelli\Hassio\Credentials;
 
-
 abstract class AbstractCredentials
 {
     /**
@@ -24,5 +23,4 @@ abstract class AbstractCredentials
     {
         return (filter_var($uri, FILTER_VALIDATE_URL) !== false);
     }
-
 }

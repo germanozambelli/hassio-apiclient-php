@@ -1,6 +1,6 @@
 <?php
 
-namespace GermanoZambelli\Hassio\Model;
+namespace GermanoZambelli\Hassio\Response;
 
 class SaveConfigFileResponse extends SimpleResponse
 {
@@ -25,7 +25,7 @@ class SaveConfigFileResponse extends SimpleResponse
     {
         $this->error = $error;
         $this->file = $file;
-        parent::__construct($message, $statusCode);
+        parent::__construct($statusCode, $message);
     }
 
     /**

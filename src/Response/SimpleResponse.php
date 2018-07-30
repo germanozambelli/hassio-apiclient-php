@@ -1,6 +1,6 @@
 <?php
 
-namespace GermanoZambelli\Hassio\Model;
+namespace GermanoZambelli\Hassio\Response;
 
 class SimpleResponse implements ResponseInterface
 {

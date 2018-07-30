@@ -7,13 +7,14 @@ use GermanoZambelli\Hassio\Client\ConfiguratorClient;
 use GermanoZambelli\Hassio\Credentials\ApiCredentials;
 use GermanoZambelli\Hassio\Credentials\ConfiguratorCredentials;
 use GermanoZambelli\Hassio\Exception\ErrorInSaveConfigFileException;
-use GermanoZambelli\Hassio\Model\SaveConfigFileResponse;
-use GermanoZambelli\Hassio\Model\SimpleResponse;
-use GermanoZambelli\Hassio\Model\ValidationConfigResponse;
+use GermanoZambelli\Hassio\Model\Entity;
+use GermanoZambelli\Hassio\Response\EntitiesStateResponse;
+use GermanoZambelli\Hassio\Response\SaveConfigFileResponse;
+use GermanoZambelli\Hassio\Response\SimpleResponse;
+use GermanoZambelli\Hassio\Response\ValidationConfigResponse;
 
 class Hassio
 {
-
     /**
      * @var ApiClient
      */
@@ -40,7 +41,10 @@ class Hassio
 
     /**
      * @return string
+     * @throws Exception\BadRequestException
      * @throws Exception\ConnectionException
+     * @throws Exception\MethodNotAllowedException
+     * @throws Exception\NotFoundException
      * @throws Exception\WrongApiCredentialsException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -51,8 +55,11 @@ class Hassio
     }
 
     /**
-     * @return SimpleResponse
+     * @return ValidationConfigResponse
+     * @throws Exception\BadRequestException
      * @throws Exception\ConnectionException
+     * @throws Exception\MethodNotAllowedException
+     * @throws Exception\NotFoundException
      * @throws Exception\WrongApiCredentialsException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -66,7 +73,10 @@ class Hassio
     /**
      * @param string $fileName
      * @return SimpleResponse
+     * @throws Exception\BadRequestException
      * @throws Exception\ConnectionException
+     * @throws Exception\MethodNotAllowedException
+     * @throws Exception\NotFoundException
      * @throws Exception\WrongConfiguratorCredentialsException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -81,7 +91,10 @@ class Hassio
      * @param string $content
      * @return SaveConfigFileResponse
      * @throws ErrorInSaveConfigFileException
+     * @throws Exception\BadRequestException
      * @throws Exception\ConnectionException
+     * @throws Exception\MethodNotAllowedException
+     * @throws Exception\NotFoundException
      * @throws Exception\WrongConfiguratorCredentialsException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -95,4 +108,66 @@ class Hassio
         return $saveConfigFileResponse;
     }
 
+    /**
+     * @param string $domain
+     * @param string $service
+     * @param array $data
+     * @return SimpleResponse
+     * @throws Exception\BadRequestException
+     * @throws Exception\ConnectionException
+     * @throws Exception\MethodNotAllowedException
+     * @throws Exception\NotFoundException
+     * @throws Exception\WrongApiCredentialsException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function callService(string $domain, string $service, array $data): SimpleResponse
+    {
+        $response = $this->apiClient->request('POST', 'services/' . $domain . "/" . $service, ['body' => json_encode($data)]);
+        return new SimpleResponse($response->getStatusCode(), $response->getBody()->getContents());
+    }
+
+    /**
+     * @param Entity $entity
+     * @return SimpleResponse
+     * @throws Exception\BadRequestException
+     * @throws Exception\ConnectionException
+     * @throws Exception\MethodNotAllowedException
+     * @throws Exception\NotFoundException
+     * @throws Exception\WrongApiCredentialsException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function turnOnEntity(Entity $entity): SimpleResponse
+    {
+        return $this->callService($entity->getDomain(), 'turn_on', ['entity_id' => $entity->getEntityId()]);
+    }
+
+    /**
+     * @param Entity $entity
+     * @return SimpleResponse
+     * @throws Exception\BadRequestException
+     * @throws Exception\ConnectionException
+     * @throws Exception\MethodNotAllowedException
+     * @throws Exception\NotFoundException
+     * @throws Exception\WrongApiCredentialsException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function turnOffEntity(Entity $entity): SimpleResponse
+    {
+        return $this->callService($entity->getDomain(), 'turn_off', ['entity_id' => $entity->getEntityId()]);
+    }
+
+    /**
+     * @return EntitiesStateResponse
+     * @throws Exception\BadRequestException
+     * @throws Exception\ConnectionException
+     * @throws Exception\MethodNotAllowedException
+     * @throws Exception\NotFoundException
+     * @throws Exception\WrongApiCredentialsException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getEntitiesState(): EntitiesStateResponse
+    {
+        $response = $this->apiClient->request('GET', 'states', []);
+        return new EntitiesStateResponse($response->getStatusCode(), $response->getBody()->getContents());
+    }
 }

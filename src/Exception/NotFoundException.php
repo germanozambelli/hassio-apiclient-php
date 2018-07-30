@@ -2,4 +2,4 @@
 
 namespace GermanoZambelli\Hassio\Exception;
 
-class BadRequestException extends \Exception{};
+class NotFoundException extends \Exception{};
