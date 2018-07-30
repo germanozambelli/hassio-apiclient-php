@@ -1,13 +1,12 @@
 {
-  "name": "GermanoZambelli/hassio-apiclient-php",
+  "name": "germanozambelli/hassio-apiclient-php",
   "description": "A simple client for hass.io API",
   "license": "MIT",
   "authors": [
       {
         "name": "Germano Zambelli",
         "email": "info@germano.codes",
-        "homepage": "https://zambelli.germano.codes",
-        "role": "Developer"
+        "homepage": "https://zambelli.germano.codes"
       }
   ],
   "autoload" : {
