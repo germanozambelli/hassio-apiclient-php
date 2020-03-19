@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: zamba
- * Date: 30/07/18
- * Time: 21.41
- */
 
 namespace GermanoZambelli\Hassio\Credentials;
 
